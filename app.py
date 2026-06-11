@@ -1,13 +1,21 @@
 """A minimal Flask app — my first web server.""" 
 
 
+from datetime import datetime
+
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)  # __name__ tells Flask where to find resources
 
 
+@app.context_processor
+def inject_year():
+    """Make the current year available to every template as `current_year`."""
+    return {'current_year': datetime.now().year}
+
+
 @app.route('/')  # maps the URL "/" to the function below
-def hello():
+def index():
     """Return the text shown when someone visits the homepage."""
     return render_template('index.html')
 
@@ -22,7 +30,7 @@ def form():
 
 @app.route('/dashboard')
 def dashboard():
-    # render_template lokks for HTML files iside the templates folder 
+    # render_template lokks for HTML 
     return render_template('dashboard.html')
 
 if __name__ == '__main__':

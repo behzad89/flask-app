@@ -1,0 +1,19 @@
+/* Custom Styles for Health Tracker Dashboard */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #fffaf0;
+}
+
+header, footer {
+    background-color: #c05621;
+}
+
+.btn-track {
+    background-color: #c05621;
+    color: #ffffff;
+}
+
+main.container {
+    height: 640px
+}

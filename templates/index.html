@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Tracker</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h2>Welcome to the Temperature Data Request Dashboard</h2>
+    <p class="lead">This is your one-stop solution to request the temperature data.</p>
+    <a href="{{ url_for('form') }}" class="btn btn-lg btn-track">Start Requesting Your Temperaure Data</a>
+</div>
+{% endblock %}

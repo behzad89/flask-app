@@ -7,23 +7,30 @@
     <div class="card-body">
         <h2 class="card-title">Request Data Form</h2>
         <form method="POST">
+            {{ form.hidden_tag() }}
             <div class="form-group">
-                <!-- date label goes here -->
-                <!-- date input goes here -->
+                {{ form.start_date.label(class="form-label") }}
+                {{ form.start_date(class="form-control") }}
             </div>
             <div class="form-group">
-                <!-- exercise label goes here -->
-                <!-- exercise input goes here -->
+                {{ form.end_date.label(class="form-label") }}
+                {{ form.end_date(class="form-control") }}
+                {% for error in form.end_date.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
             </div>
             <div class="form-group">
-                <!-- meditation label goes here -->
-                <!-- meditation input goes here -->
+                {{ form.output_format.label(class="form-label") }}
+                {{ form.output_format(class="form-control") }}
             </div>
             <div class="form-group">
-                <!-- sleep label goes here -->
-                <!-- sleep input goes here -->
+                {{ form.email.label(class="form-label") }}
+                {{ form.email(class="form-control") }}
+                {% for error in form.email.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
             </div>
-            <!-- submit button goes here -->
+            {{ form.submit(class="btn btn-primary") }}
         </form>
     </div>
 </div>

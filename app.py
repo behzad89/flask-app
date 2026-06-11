@@ -3,10 +3,11 @@
 
 from datetime import datetime
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, redirect, url_for
+from forms import DataRequestForm
 
 app = Flask(__name__)  # __name__ tells Flask where to find resources
-
+app.config['SECRET_KEY'] = "my_super_secret_key_123"
 
 @app.context_processor
 def inject_year():
@@ -21,12 +22,13 @@ def index():
 
 @app.route('/form', methods=['POST', 'GET'])
 def form():
+    form = DataRequestForm()
     # Flow:
-    #   GET  (just visiting /form)  -> show form.html (the blank form)
-    #   POST (form submitted)       -> redirect to the dashboard page
-    if request.method == 'POST':
+    #   GET, or invalid POST  -> show form.html (re-renders with error messages)
+    #   valid POST            -> redirect to the dashboard page
+    if form.validate_on_submit():
         return redirect(url_for('dashboard'))
-    return render_template('form.html')
+    return render_template('form.html', form=form)
 
 @app.route('/dashboard')
 def dashboard():

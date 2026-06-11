@@ -17,3 +17,7 @@ header, footer {
 main.container {
     height: 640px
 }
+
+.card {
+    background-color: #fffaf0;
+}

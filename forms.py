@@ -1,8 +1,16 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, DateField, SelectField, StringField
-from wtforms.validators import DataRequired, Email, ValidationError
+from wtforms import SubmitField, DateField, SelectField, StringField, DecimalField
+from wtforms.validators import DataRequired, Email, NumberRange
 
 class DataRequestForm(FlaskForm):
+    latitude = DecimalField('Latitude',
+                            validators=[
+                                DataRequired(),
+                                NumberRange(min=-90, max=90)])
+    longitude = DecimalField('Longitude',
+                             validators=[
+                                 DataRequired(),
+                                 NumberRange(min=-180, max=180)])
     start_date = DateField('Start Date', format='%Y-%m-%d',
                            validators=[DataRequired()])
     end_date = DateField('End Date', format='%Y-%m-%d',
@@ -16,9 +24,3 @@ class DataRequestForm(FlaskForm):
                             Email()
                         ])
     submit = SubmitField('Submit')
-
-    def validate_end_date(self, field):
-        """Ensure the end date is strictly after the start date."""
-        if self.start_date.data and field.data:
-            if field.data <= self.start_date.data:
-                raise ValidationError('End date must be after the start date.')

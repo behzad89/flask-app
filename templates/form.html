@@ -9,15 +9,26 @@
         <form method="POST">
             {{ form.hidden_tag() }}
             <div class="form-group">
+                {{ form.latitude.label(class="form-label") }}
+                {{ form.latitude(class="form-control") }}
+                {% for error in form.latitude.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.longitude.label(class="form-label") }}
+                {{ form.longitude(class="form-control") }}
+                {% for error in form.longitude.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group">
                 {{ form.start_date.label(class="form-label") }}
-                {{ form.start_date(class="form-control") }}
+                {{ form.start_date(class="form-control", max=today) }}
             </div>
             <div class="form-group">
                 {{ form.end_date.label(class="form-label") }}
-                {{ form.end_date(class="form-control") }}
-                {% for error in form.end_date.errors %}
-                    <small class="text-danger">{{ error }}</small>
-                {% endfor %}
+                {{ form.end_date(class="form-control", max=today) }}
             </div>
             <div class="form-group">
                 {{ form.output_format.label(class="form-label") }}

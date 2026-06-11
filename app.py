@@ -2,7 +2,6 @@
 
 
 from datetime import datetime
-
 from flask import Flask, render_template, redirect, url_for
 from forms import DataRequestForm
 
@@ -11,8 +10,9 @@ app.config['SECRET_KEY'] = "my_super_secret_key_123"
 
 @app.context_processor
 def inject_year():
-    """Make the current year available to every template as `current_year`."""
-    return {'current_year': datetime.now().year}
+    """Make the current year and today's date available to every template."""
+    now = datetime.now()
+    return {'current_year': now.year, 'today': now.strftime('%Y-%m-%d')}
 
 
 @app.route('/')  # maps the URL "/" to the function below
